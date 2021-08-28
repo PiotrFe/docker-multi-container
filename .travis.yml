@@ -9,15 +9,15 @@ script:
   - docker run -e CI=true piotrfer/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t piotrfer/multi-client ./client
-  - docker build -t piotrfer/multi-nginx ./nginx
-  - docker build -t piotrfer/multi-server ./server
-  - docker build -t piotrfer/multi-worker ./worker
+  - docker build -t piotrferensztajn/multi-client ./client
+  - docker build -t piotrferensztajn/multi-nginx ./nginx
+  - docker build -t piotrferensztajn/multi-server ./server
+  - docker build -t piotrferensztajn/multi-worker ./worker
 
   # Log in to the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # Take images and pysh them to docker hub
-  - docker push piotrfer/multi-client
-  - docker push piotrfer/multi-nginx
-  - docker push piotrfer/multi-server
-  - docker push piotrfer/multi-worker
+  # Take images and push them to docker hub
+  - docker push piotrferensztajn/multi-client
+  - docker push piotrferensztajn/multi-nginx
+  - docker push piotrferensztajn/multi-server
+  - docker push piotrferensztajn/multi-worker
