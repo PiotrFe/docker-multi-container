@@ -17,7 +17,7 @@ after_success:
   # Log in to the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take images and pysh them to docker hub
-  - docker push piotrferensztajn/docker-multi-container:piotrfer/multi-client
-  - docker push piotrferensztajn/docker-multi-container:piotrfer/multi-nginx
-  - docker push piotrferensztajn/docker-multi-container:piotrfer/multi-server
-  - docker push piotrferensztajn/docker-multi-container:piotrfer/multi-worker
+  - docker push piotrfer/multi-client
+  - docker push piotrfer/multi-nginx
+  - docker push piotrfer/multi-server
+  - docker push piotrfer/multi-worker
