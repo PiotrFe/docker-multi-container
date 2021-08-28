@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t piotrfer/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true piotrfer/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t piotrfer/multi-client ./client
+  - docker build -t piotrfer/multi-nginx ./nginx
+  - docker build -t piotrfer/multi-server ./server
+  - docker build -t piotrfer/multi-worker ./worker
+
+  # Log in to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take images and pysh them to docker hub
+  - docker push piotrfer/multi-client
+  - docker push piotrfer/multi-nginx
+  - docker push piotrfer/multi-server
+  - docker push piotrfer/multi-worker
